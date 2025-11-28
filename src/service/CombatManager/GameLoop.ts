@@ -1,10 +1,9 @@
-import { atacar, ataqueMagico, curar } from "../CombatService";
+import { atacar, ataqueMagico, curar, rolarDadodd20 } from "../CombatService";
 import { Personagem } from "../../model/Personagem";
 import { Guerreiro } from "../../model/Guerreiro";
 import { Mago } from "../../model/Mago";
 import { AcaoCombate, ClassesJogo } from "../../model/GameTypes";
 
-// Definindo o que o processarTurno vai devolver
 interface ResultadoTurno {
     jogoContinua: boolean;
     logs: string[];
@@ -13,100 +12,122 @@ interface ResultadoTurno {
 export class GameLoop {
     private principal!: Personagem;
     private alvo!: Personagem;
-    
-    // Nosso "caderninho" de anotações
+
     private logs: string[] = [];
 
-    // Helper para adicionar mensagens no caderno
     private log(msg: string) {
         this.logs.push(msg);
     }
 
+    // -------------------------------------
+    //             INICIAR JOGO
+    // -------------------------------------
     public iniciarJogo(nome: string, escolhaClasse: ClassesJogo): Personagem {
         switch (escolhaClasse) {
-            case 'GUERREIRO':
-                this.alvo = new Mago("Merlin");
+            case "GUERREIRO":
                 this.principal = new Guerreiro(nome);
-                return this.principal;
+                this.alvo = new Mago("Merlin");
+                break;
 
-            case 'MAGO':
-                this.alvo = new Guerreiro("Arthur");
+            case "MAGO":
                 this.principal = new Mago(nome);
-                return this.principal;
+                this.alvo = new Guerreiro("Arthur");
+                break;
 
             default:
                 throw new Error("Classe inválida.");
         }
+
+        return this.principal;
     }
 
-    public getPrincipal(): Personagem { return this.principal; }
-    public getAlvo(): Personagem { return this.alvo; }
+    public getPrincipal(): Personagem {
+        return this.principal;
+    }
 
+    public getAlvo(): Personagem {
+        return this.alvo;
+    }
+
+    // -------------------------------------
+    //             PROCESSAR TURNO
+    // -------------------------------------
     public processarTurno(acao: AcaoCombate): ResultadoTurno {
-        // 1. Limpa o caderno no início do turno (apaga logs antigos)
+        if (!this.principal || !this.alvo) {
+            throw new Error("O jogo ainda não foi iniciado.");
+        }
+
         this.logs = [];
 
-        // 2. Turno do Jogador
+        const d20PrimeiroTurnoJogador = rolarDadodd20() + this.principal.velocidade;
+        const d20PrimeiroTurnoMaquina = rolarDadodd20() + this.alvo.velocidade;
+
+
         this.turnoJogador(acao);
 
-        // 3. Verifica Vitória
-        if (this.alvo.gethp() <= 0) {
+
+        if (this.alvo.hp <= 0) {
             this.log("🎉 Você venceu o combate!");
             return { jogoContinua: false, logs: this.logs };
         }
 
-        // 4. Turno do Inimigo
+
         this.turnoInimigo();
 
-        // 5. Verifica Derrota
-        if (this.principal.gethp() <= 0) {
+        if (this.principal.hp <= 0) {
             this.log("💀 Você foi derrotado...");
             return { jogoContinua: false, logs: this.logs };
         }
 
-        // 6. Retorna tudo
         return { jogoContinua: true, logs: this.logs };
     }
 
+
     private turnoJogador(acao: AcaoCombate) {
-        // Aqui você pode melhorar as mensagens depois
         switch (acao) {
-            case 'ATACAR':
-                const danoFisico = atacar(this.principal, this.alvo);
-                this.log(`Você atacou e causou ${danoFisico} de dano.`);
+            case "ATACAR": {
+                const dano = atacar(this.principal, this.alvo);
+                this.log(`🗡️ Você atacou e causou ${dano} de dano.`);
                 break;
-            case 'CURAR':
-                const cura = curar(this.principal);
-                this.log(`Você usou uma poção e recuperou ${cura} de HP.`);
+            }
+
+            case "MAGIA": {
+                const dano = ataqueMagico(this.principal, this.alvo);
+                this.log(`✨ Você usou magia e causou ${dano} de dano.`);
                 break;
-            case 'MAGIA':
-                const danoMagico = ataqueMagico(this.principal, this.alvo);
-                this.log(`Você usou magia e causou ${danoMagico} de dano.`);
+            }
+
+            case "CURAR": {
+                const valorCura = curar(this.principal);
+                this.log(`🧪 Você usou uma poção e recuperou ${valorCura} de HP.`);
                 break;
+            }
+
             default:
-                this.log("Você tropeçou e perdeu a vez (Escolha inválida).");
+                this.log("Você se atrapalhou e perdeu a ação! (ação inválida)");
         }
     }
 
     private turnoInimigo() {
         const chance = Math.random();
 
-        if (
-            this.alvo.gethp() <= 0.15 * this.alvo.gethpMax() &&
-            this.alvo.getQtdPot() > 0 &&
-            chance < 0.3
-        ) {
-            let cura = curar(this.alvo);
-            this.log(`O inimigo usa uma poção e curou ${cura} de HP.`);
-            return;
-        } 
-        
-        if (this.alvo.getMana() > 5 && chance < 0.7) {
-            let dano = ataqueMagico(this.alvo, this.principal);
-            this.log(`O inimigo lançou magia e causou ${dano} de dano!`);
+
+        const vidaBaixa = this.alvo.hp <= this.alvo.hpMax * 0.15;
+
+        if (vidaBaixa && this.alvo.qtdPot > 0 && chance < 0.3) {
+            const curaValor = curar(this.alvo);
+            this.log(`🧪 O inimigo usou uma poção e curou ${curaValor} de HP.`);
             return;
         }
 
-        let danoFisico = atacar(this.alvo, this.principal);
-        this.log(`O inimigo te atacou fisicamente causando ${danoFisico} de dano.`);
+
+        if (this.alvo.mana >= 5 && chance < 0.7) {
+            const danoMagia = ataqueMagico(this.alvo, this.principal);
+            this.log(`✨ O inimigo lançou magia e causou ${danoMagia} de dano!`);
+            return;
+        }
+
+        const danoFisico = atacar(this.alvo, this.principal);
+        this.log(`🗡️ O inimigo te atacou fisicamente causando ${danoFisico} de dano.`);
     }
+}

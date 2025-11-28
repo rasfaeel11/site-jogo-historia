@@ -9,6 +9,7 @@ export class Mago extends Personagem {
         const qtdPot = 3;
         const _inteligenciaMago = 7;
         const _manaMax = 30;
+        const _velocidade = 5
 
         super(
             nome,
@@ -19,7 +20,8 @@ export class Mago extends Personagem {
             forcaMago,
             qtdPot,
             _inteligenciaMago,
-            _manaMax
+            _manaMax,
+            _velocidade
         );
 
     }

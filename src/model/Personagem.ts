@@ -8,12 +8,9 @@ export abstract class Personagem {
     protected _forca: number,
     protected _qtdPot: number,
     private _inteligencia: number,
-    private _manaMax: number
+    private _manaMax: number,
+    protected _velocidade: number
   ) {}
-
-  // -----------------------------------------
-  //              GETTERS / SETTERS
-  // -----------------------------------------
 
   public get hp(): number {
     return this._hp;
@@ -63,5 +60,11 @@ export abstract class Personagem {
   }
   protected set manaMax(valor: number) {
     this._manaMax = valor;
+  }
+  public get velocidade(): number {
+    return this._velocidade;
+  }
+  public set velocidade(valor: number){
+    this._velocidade = valor;
   }
 }
