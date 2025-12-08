@@ -19,9 +19,6 @@ export class GameLoop {
         this.logs.push(msg);
     }
 
-    // -------------------------------------
-    //             INICIAR JOGO
-    // -------------------------------------
     public iniciarJogo(nome: string, escolhaClasse: ClassesJogo): Personagem {
         switch (escolhaClasse) {
             case "GUERREIRO":
@@ -62,17 +59,17 @@ export class GameLoop {
         const d20PrimeiroTurnoJogador = rolarDadodd20() + this.principal.velocidade;
         const d20PrimeiroTurnoMaquina = rolarDadodd20() + this.alvo.velocidade;
 
-
-        this.turnoJogador(acao);
+        if(d20PrimeiroTurnoJogador > d20PrimeiroTurnoMaquina){
+            this.turnoJogador(acao);
+        } else {
+             this.turnoInimigo();
+        }
 
 
         if (this.alvo.hp <= 0) {
             this.log("🎉 Você venceu o combate!");
             return { jogoContinua: false, logs: this.logs };
         }
-
-
-        this.turnoInimigo();
 
         if (this.principal.hp <= 0) {
             this.log("💀 Você foi derrotado...");
