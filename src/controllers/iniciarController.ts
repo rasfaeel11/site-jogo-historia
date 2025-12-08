@@ -9,10 +9,12 @@ export const iniciar = async(req: Request, res: Response) => {
         return res.status(400).json({erro: "nome e classe sao obrigatorios"})
     }
     const classesJogo: ClassesJogo[] = ['GUERREIRO', 'MAGO'];
+    
     if(!classesJogo.includes(classe)){
         return res.status(400).json({erro: "classe invalida"})
     };
-    const jogo = new GameLoop();
+
+    let jogo = new GameLoop();
     const personagem = jogo.iniciarJogo(nome, classe);
 
     res.json({
