@@ -1,5 +1,5 @@
 import express from 'express';
-
+import jogarRoutes from './routes/jogarRoutes';
 import iniciarRoute from './routes/iniciarRoutes';
 
 const PORT = process.env.PORT || 3000;
@@ -11,3 +11,4 @@ app.listen(3000, () =>{
 })
 
 app.use('/iniciar', iniciarRoute);
+app.use('/jogar', jogarRoutes);
