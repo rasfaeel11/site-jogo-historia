@@ -20,7 +20,8 @@ export const iniciar = async(req: Request, res: Response) => {
         res.json({
             mensagem: "Jogo Iniciado",
             gameId: resultado.id, 
-            jogador: resultado.personagem
+            jogador: resultado.personagem,
+            inimigo: resultado.inimigo
         });
     } catch (error: any) {
         res.status(500).json({ erro: error.message });

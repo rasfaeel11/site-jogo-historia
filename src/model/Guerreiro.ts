@@ -1,27 +1,18 @@
 import { Personagem } from "./Personagem";
 
 export class Guerreiro extends Personagem {
-    constructor(nome: string){
-        const classeGuerreiro = "Guerreiro";
-        const hpGuerreiro = 50;
-        const manaGuerreiro = 10;
-        const forcaGuerreiro = 7;
-        const qtdPot = 3;
-        const _inteligenciaGuerreiro = 2;
-        const _manaMax = 10;
-        const _velocidade = 10;
-
-        super(
-            nome, 
-            classeGuerreiro,
-            hpGuerreiro,
-            hpGuerreiro,
-            manaGuerreiro,
-            forcaGuerreiro,
-            qtdPot,
-            _inteligenciaGuerreiro,
-            _manaMax,
-            _velocidade
-        );
+    constructor(nome: string) {
+        super(nome); // Passa só o nome para o Pai
+        
+        // Define os atributos específicos do Guerreiro
+        this.hp = 150;
+        this.hpMax = 150;
+        this.mana = 20;
+        this.manaMax = 20;
+        this.forca = 15;
+        this.defesa = 12;
+        this.inteligencia = 5;
+        this.velocidade = 4;
+        this.qtdPot = 3;
     }
 }
