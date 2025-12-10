@@ -62,7 +62,11 @@ export class GameService {
 
         if (erroUpdate) throw new Error("Erro ao salvar turno.");
 
-        return resultado;
+        return {
+            ...resultado, // Espalha (jogoContinua, logs)
+            heroi: jogo.getPrincipal(), // Adiciona o herói atualizado
+            inimigo: jogo.getAlvo()     // Adiciona o inimigo atualizado
+        };
     }
 }
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>RPG Backend Teste</title>
+</head>
+<body>
+
+    <div id="tela-menu">
+        <h1>Criar Novo Jogo</h1>
+        
+        <label>Nome do Herói:</label>
+        <input type="text" id="inputNome" placeholder="Ex: Aragorn">
+        <br><br>
+
+        <label>Classe:</label>
+        <select id="selectClasse">
+            <option value="GUERREIRO">Guerreiro</option>
+            <option value="MAGO">Mago</option>
+        </select>
+        <br><br>
+
+        <button onclick="comecarJogo()">INICIAR AVENTURA</button>
+    </div>
+
+    <div id="tela-jogo" style="display: none;">
+        <h1>Combate</h1>
+        
+        <h3>Você: <span id="displayHeroi">...</span></h3>
+        <h3>Inimigo: <span id="displayInimigo">...</span></h3>
+        <hr>
+        
+        <button onclick="jogarTurno('ATACAR')">Atacar</button>
+        <button onclick="jogarTurno('CURAR')">Curar</button>
+        <button onclick="jogarTurno('MAGIA')">Magia</button>
+
+        <h3>Histórico:</h3>
+        <div id="listaLogs"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
