@@ -1,20 +1,14 @@
-// VARIÁVEL GLOBAL
-// Precisamos dela aqui fora para ela "sobreviver" entre as funções.
-// É aqui que vamos guardar o UUID que o banco de dados vai gerar.
+
 let idDoJogoSalvo = null; 
 
-// ================================================================
-// FUNÇÃO 1: INICIAR (POST /iniciar)
-// ================================================================
+
 async function comecarJogo() {
     
-    // 1. CAPTURAR DADOS (DOM)
-    // document.getElementById pega o elemento pelo ID do HTML
-    // .value pega o que está escrito dentro dele
+
     const nomeDigitado = document.getElementById("inputNome").value;
     const classeSelecionada = document.getElementById("selectClasse").value;
 
-    // Validação simples no front
+
     if(nomeDigitado === "") {
         alert("Digite um nome!");
         return;
@@ -22,9 +16,7 @@ async function comecarJogo() {
 
     console.log("Tentando criar jogo..."); // Bom para debugar (F12)
 
-    // 2. FETCH (A Requisição)
-    // O fetch é uma "Promessa" (Promise). Ele demora um pouco.
-    // Por isso usamos 'await' (espere) e a função tem que ser 'async'.
+    
     const resposta = await fetch("http://localhost:3000/iniciar", {
         method: "POST", // O método HTTP
         headers: {
@@ -36,8 +28,7 @@ async function comecarJogo() {
         })
     });
 
-    // 3. TRATAR RESPOSTA
-    // O fetch retorna um fluxo de dados. Precisamos converter pra JSON.
+   
     const dados = await resposta.json();
 
     if(resposta.status === 200) {
@@ -59,11 +50,9 @@ async function comecarJogo() {
     }
 }
 
-// ================================================================
-// FUNÇÃO 2: JOGAR O TURNO (POST /jogar)
-// ================================================================
+
 async function jogarTurno(acaoEscolhida) {
-    // Segurança: só joga se tiver ID
+
     if(idDoJogoSalvo === null) {
         alert("Erro: Jogo não iniciado.");
         return;
@@ -71,36 +60,22 @@ async function jogarTurno(acaoEscolhida) {
 
     console.log("Enviando ação:", acaoEscolhida);
 
-    // Faz o fetch para a rota /jogar
-    const resposta = await fetch("http://localhost:3000/jogar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            acao: acaoEscolhida,
-            gameId: idDoJogoSalvo // <--- O SEGREDINHO: MANDAR O ID PRO BACK SABER QUEM É
-        })
-    });
-
-    const dados = await resposta.json();
-
-    if(resposta.status === 200) {
-        // O backend devolve: { heroi, inimigo, historicoDeBatalha, jogoContinua }
-        atualizarTela(dados.heroi, dados.inimigo);
-        mostrarLogs(dados.logs);
-
-        if(dados.jogoContinua === false) {
-            alert("Fim de Jogo! Verifique o log.");
-        }
-    } else {
-        alert("Erro: " + dados.erro);
+    const dados = await enviarAcaoParaBackend(acaoEscolhida);
+    if (!dados || dados.erro) {
+        alert("Erro: " + (dados ? dados.erro : "Falha na conexão"));
+        return;
     }
+
+    atualizarTela(dados.heroi, dados.inimigo);
+    mostrarLogs(dados.logs);
+
+    if (dados.jogoContinua === false) {
+        alert("Fim de Jogo!");
 }
 
-// ================================================================
-// FUNÇÕES AUXILIARES (APENAS VISUAL)
-// ================================================================
+
 function atualizarTela(heroi, inimigo) {
-    // Pega os spans e muda o texto dentro deles (.innerText)
+
     document.getElementById("displayHeroi").innerText = 
         `${heroi.nome} (HP: ${heroi.vidaAtual}/${heroi.vidaMax || heroi.vidaAtual})`;
     
@@ -118,4 +93,55 @@ function mostrarLogs(listaDeLogs) {
         p.innerText = frase; // Põe o texto
         divLogs.appendChild(p); // Adiciona na div
     });
+}
+
+async function tentarFugir() {
+    if(idDoJogoSalvo == null){
+        alert("jogo nao iniciado");
+        return;
+    }
+    const dados = await enviarAcaoParaBackend("FUGIR");
+    atualizarTela(dados.heroi, dados.inimigo);
+    mostrarLogs(dados.logs);
+}
+
+async function enviarAcaoParaBackend() {
+    if (idDoJogoSalvo === null) {
+        console.error("Sem ID de jogo!");
+        return null;
+    }
+
+    const resposta = await fetch("http://localhost:3000/jogar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            acao: acaoNome,
+            gameId: idDoJogoSalvo
+        })
+    });
+
+    return await resposta.json(); // Retorna o objeto pronto (dados)
+}}
+
+async function ativarModoBerserker() {
+    console.log("MODO BERSERKER!!");
+    const esperar = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    let lutando = true;
+    while(lutando){
+        let acaoDoRobo = "ATACAR";
+         if(resultado.heroi.vidaAtual < 50){
+                console.log("vida baixa");
+                acaoDoRobo= "CURAR";
+            }
+        const resultado =  await enviarAcaoParaBackend(acaoDoRobo);
+        if(resultado == null || resultado.erro){
+            console.log("fim de conexäo")
+            lutando = false;
+        } else{
+            atualizarTela(resultado.heroi, resultado.inimigo);
+            mostrarLogs(resultado.logs);
+            lutando = resultado.jogoContinua;
+        }
+        await esperar(1000);
+    }
 }
