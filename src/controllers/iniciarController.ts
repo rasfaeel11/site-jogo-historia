@@ -9,7 +9,16 @@ export const iniciar = async(req: Request, res: Response) => {
             return res.status(400).json({erro: "nome e classe sao obrigatorios"});
         }
 
-        const classesJogo = ['GUERREIRO', 'MAGO'];
+        const classesJogo = ['LUMINAR',
+    'RACHADOR_HARMONIA',
+    'CANTOR_DE_EALEN',
+    'ENTROPISTA',
+    'FORJARDENTE',
+    'GUARDIAO_SINGULARIDADE',
+    'SOMBRILICO',
+    'VIAJANTE_TALUEN',
+    'LUNATH_ANCESTRAL',
+    'MISTICO_ENTALMA'];
         if(!classesJogo.includes(classe)){
             return res.status(400).json({erro: "classe invalida"});
         };

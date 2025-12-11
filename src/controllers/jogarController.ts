@@ -10,7 +10,7 @@ export const jogar = async(req: Request, res: Response) => {
             return res.status(400).json({ erro: "gameId é obrigatório" });
         }
 
-        const acoesValidas = ['ATACAR', 'CURAR', 'MAGIA', 'FUGIR'];
+        const acoesValidas = ['ATACAR', 'CURAR', 'MAGIA', 'FUGIR', 'HABILIDADE_ESPECIAL'];
         if(!acoesValidas.includes(acao)){
             return res.status(400).json({ erro: `Ação inválida! Use: ${acoesValidas.join(', ')}` });
         }

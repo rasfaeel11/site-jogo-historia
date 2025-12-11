@@ -10,4 +10,4 @@ export type ClassesJogo =
     | 'RACHADOR_HARMONIA' 
     | 'MISTICO_ENTALMA';
 
-export type AcaoCombate = 'ATACAR' | 'DEFENDER' | 'HABILIDADE_ESPECIAL' | 'CURAR' | 'FUGIR';
+export type AcaoCombate = 'ATACAR' | 'DEFENDER' | 'HABILIDADE_ESPECIAL' | 'CURAR' | 'FUGIR' | 'MAGIA';
