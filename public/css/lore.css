@@ -1,0 +1,178 @@
+/* --- FIX PARA A PÁGINA DE LORE --- */
+
+/* 1. Ajustes Globais da Página */
+.lore-page {
+    /* Garante que o fundo está correto e a fonte base é legível */
+    background-color: var(--bg-deep, #020204); /* Fallback caso a variável não exista */
+    color: var(--text-primary, #e0d6c2);
+    font-family: var(--font-body, 'Spectral', serif);
+    line-height: 1.8;
+    /* Adiciona uma textura sutil de pergaminho escuro sobre as estrelas */
+    background-blend-mode: overlay;
+    background: linear-gradient(to bottom, rgba(10,10,20,0.8), rgba(0,0,0,1)), url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='rgba(255,255,255,0.1)'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+}
+
+/* 2. Melhoria na Barra de Navegação */
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    position: absolute; /* Fica sobre o header */
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent); /* Sombra suave no topo */
+}
+
+.nav-link {
+    color: var(--gold-bright, #d4af37);
+    text-decoration: none;
+    font-family: var(--font-title, 'Cinzel', serif);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    transition: all 0.3s;
+}
+.nav-link:hover { opacity: 1; text-shadow: 0 0 10px var(--gold-bright); }
+.nav-title {
+    font-family: var(--font-title);
+    color: var(--text-dim, #8a8a9c);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+
+/* 3. Cabeçalho Compacto e Elegante */
+/* Substitua ou adicione este bloco para a classe .hero */
+.hero {
+    /* 1. Ativa o Flexbox para centralizar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza Verticalmente */
+    align-items: center;     /* Centraliza Horizontalmente */
+    text-align: center;      /* Garante que o texto fique centralizado */
+
+    /* 2. Dimensões */
+    min-height: 60vh;
+    width: 100%;
+    
+    /* 3. Espaçamento (Importante por causa da navbar fixa) */
+    padding-top: 4rem; 
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    /* 4. Visual (Fundo sutil) */
+    background: radial-gradient(circle at top, rgba(212, 175, 55, 0.05), transparent 70%);
+    border-bottom: none;
+}
+
+/* Ajuste fino para o subtítulo não ficar muito largo */
+.hero .subtitle {
+    max-width: 700px; /* Limita a largura para ficar elegante */
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-dim, #8a8a9c);
+}
+
+/* Ajuste para o título */
+.hero h1 {
+    font-size: 3.5rem;
+    color: var(--gold-bright, #d4af37);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.main-title {
+    font-size: 3.5rem;
+    color: var(--gold-bright, #d4af37);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.quote-container {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Adiciona aspas decorativas gigantes */
+.quote-container::before {
+    content: '“';
+    position: absolute;
+    top: -20px; left: -40px;
+    font-size: 6rem;
+    color: var(--gold-bright);
+    opacity: 0.2;
+    font-family: var(--font-title);
+}
+
+.main-quote {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text-primary);
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+
+/* 4. O Container do Códice (Onde o texto fica) */
+.codex-container {
+    max-width: 800px; /* LIMITA A LARGURA PARA LEITURA CONFORTÁVEL */
+    margin: 4rem auto; /* Centraliza na tela */
+    padding: 3rem;
+    
+    /* Efeito de "Página" Mística */
+    background: rgba(10, 10, 15, 0.6); /* Fundo semi-transparente */
+    border: 1px solid rgba(212, 175, 55, 0.2); /* Borda dourada sutil */
+    box-shadow: 0 0 50px rgba(0,0,0,0.5); /* Sombra para destacar do fundo */
+    backdrop-filter: blur(10px); /* Efeito de vidro embaçado */
+    border-radius: 4px;
+}
+
+
+/* 5. Estilos do Texto e Seções */
+.section-title-lore {
+    font-family: var(--font-title);
+    color: var(--gold-bright);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.text-block p {
+    margin-bottom: 1.5rem;
+    font-size: 1.15rem; /* Fonte ligeiramente maior para leitura */
+}
+
+/* Destaca palavras importantes */
+strong {
+    color: var(--gold-bright);
+    font-weight: normal;
+}
+
+/* Parágrafo de destaque final */
+.highlight-paragraph {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-top: 3rem;
+    padding: 2rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    font-style: italic;
+    background: rgba(212, 175, 55, 0.05);
+}
+
+/* Divisor entre seções */
+.codex-divider {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--gold-bright);
+    opacity: 0.5;
+    margin: 3rem 0;
+    text-shadow: 0 0 10px var(--gold-bright);
+}

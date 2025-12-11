@@ -2,53 +2,129 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>RPG Backend Teste</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub - O Canto das Primeiras Luzes</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+     <link rel="stylesheet" href="css/global.css"> <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 
-    <div id="tela-menu">
-        <h1>Criar Novo Jogo</h1>
+    <section class="hero">
+        <div style="font-size: 3rem; margin-bottom: -1rem;">✨</div>
+        <h1>O Canto das Primeiras Luzes</h1>
+        <p class="subtitle">
+            "No princípio, o Eterno falou, e Sua voz tornou-se música.<br>
+            A luz veio do som, e a matéria veio da harmonia."
+        </p>
         
-        <label>Nome do Herói:</label>
-        <input type="text" id="inputNome" placeholder="Ex: Aragorn">
-        <br><br>
+        <br>
+        <a href="jogo.html" class="btn-primary">ENTRAR NA SIMULAÇÃO</a>
+        
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.6;">▼ Role para Ler o Códice ▼</p>
+    </section>
 
-        <label>Classe:</label>
-        <select id="selectClasse">
-            <option value="LUMINAR">Luminar</option>
-            <option value="RACHADOR_HARMONIA">Rachador da Harmonia</option>
-            <option value="CANTOR_DE_EALEN">Cantor de Ealen</option>
-            <option value="ENTROPISTA">Entropista</option>
-            <option value="FORJARDENTE">Forjardente</option>
-            <option value="GUARDIAO_SINGULARIDADE">Guardião da Singularidade</option>
-            <option value="SOMBRILICO">Sombrílico</option>
-            <option value="VIAJANTE_TALUEN">Viajante Taluen</option>
-            <option value="LUNATH_ANCESTRAL">Lunath Ancestral</option>
-            <option value="MISTICO_ENTALMA">Místico da Entalma</option>
-</select>
-        <br><br>
+    <div class="container">
+        
+        <h2 class="section-title">A Cosmogonia</h2>
+        
+        <div class="lore-grid">
+            <div class="lore-text">
+                <h3>A Gênese de Aelir</h3>
+                <p>Antes que o calor existisse, <strong>Aelir, o Anjo da Aurora</strong>, desceu ao vazio. Com lágrimas feitas de frequência pura, ele moldou as estrelas. Elas não eram fogo, mas sim <em>ressonância</em> — notas físicas sustentando a realidade.</p>
+            </div>
+            <div class="lore-text" style="border-left-color: var(--gold-bright);">
+                <h3>A Dissonância de Mordain</h3>
+                <p>O orgulho é um som que não harmoniza. Mordain tentou criar luz sem música, gerando o Fogo — uma reação violenta e entrópica. O universo fraturou-se entre a <strong>Harmonia (Eälen)</strong> e a <strong>Entropia (Tháran)</strong>.</p>
+            </div>
+        </div>
 
-        <button onclick="comecarJogo()">INICIAR AVENTURA</button>
+        <div class="lore-highlight">
+            “A luz que não fere, mas cura. A chama que não consome, mas recorda.”
+        </div>
+
+        <div class="runes-section">
+            <h2 class="section-title">O Alfabeto Sagrado: Tirán</h2>
+            <p style="max-width: 600px; margin: 0 auto;">
+                A língua da criação. Cada runa representa um conceito físico e espiritual.
+                <br><em>(Passe o mouse para traduzir)</em>
+            </p>
+            
+            <div class="rune-grid">
+                <div class="rune-card"><span class="rune-symbol">A</span><span class="rune-name">Aen (Luz)</span></div>
+                <div class="rune-card"><span class="rune-symbol">E</span><span class="rune-name">Eir (Espírito)</span></div>
+                <div class="rune-card"><span class="rune-symbol">I</span><span class="rune-name">Il (Visão)</span></div>
+                <div class="rune-card"><span class="rune-symbol">O</span><span class="rune-name">Or (Matéria)</span></div>
+                <div class="rune-card"><span class="rune-symbol">U</span><span class="rune-name">Ul (Mistério)</span></div>
+                <div class="rune-card"><span class="rune-symbol">L</span><span class="rune-name">Len (Som)</span></div>
+                <div class="rune-card"><span class="rune-symbol">N</span><span class="rune-name">Nath (Vida)</span></div>
+                <div class="rune-card"><span class="rune-symbol">M</span><span class="rune-name">Mor (Sombra)</span></div>
+                <div class="rune-card"><span class="rune-symbol">D</span><span class="rune-name">Dain (Força)</span></div>
+            </div>
+        </div>
+
+        <h2 class="section-title">As Ordens da Criação</h2>
+        <div class="classes-grid">
+            
+            <div class="class-card">
+                <span class="class-icon">🛡️</span>
+                <h3>Luminar</h3>
+                <span class="class-role">Tank / Suporte</span>
+                <p>Paladinos da Primeira Luz. Canalizam a radiação estelar para criar escudos impenetráveis de ordem.</p>
+            </div>
+
+            <div class="class-card">
+                <span class="class-icon">🌀</span>
+                <h3>Entropista</h3>
+                <span class="class-role">Debuffer</span>
+                <p>Monges que estudam o cansaço da matéria. Usam a termodinâmica como arma espiritual.</p>
+            </div>
+
+            <div class="class-card">
+                <span class="class-icon">🎵</span>
+                <h3>Cantor de Eälen</h3>
+                <span class="class-role">Controle</span>
+                <p>Magos que entoam as notas da física, alterando a gravidade e o tempo com a voz.</p>
+            </div>
+
+            <div class="class-card">
+                <span class="class-icon">🌌</span>
+                <h3>Guardião</h3>
+                <span class="class-role">Tank Ofensivo</span>
+                <p>Cavaleiros da Singularidade. Sua armadura dobra o espaço ao redor para refletir impacto.</p>
+            </div>
+            
+            <div class="class-card">
+                <span class="class-icon">🌑</span>
+                <h3>Sombrílico</h3>
+                <span class="class-role">Anti-Mago</span>
+                <p>Feiticeiros do Silêncio. Eles anulam o canto da criação, devorando a magia inimiga.</p>
+            </div>
+
+            <div class="class-card">
+                <span class="class-icon">🎯</span>
+                <h3>Rachador</h3>
+                <span class="class-role">Sniper Físico</span>
+                <p>Arqueiros matemáticos. Enxergam as equações de trajetória para ignorar barreiras.</p>
+            </div>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="lore.html" class="btn-primary">SAIBA MAIS</a>
+        </div>
+
     </div>
 
-    <div id="tela-jogo" style="display: none;">
-        <h1>Combate</h1>
-        
-        <h3>Você: <span id="displayHeroi">...</span></h3>
-        <h3>Inimigo: <span id="displayInimigo">...</span></h3>
-        <hr>
-        
-        <button onclick="jogarTurno('ATACAR')">Atacar</button>
-        <button onclick="jogarTurno('CURAR')">Curar</button>
-        <button onclick="jogarTurno('MAGIA')">Magia</button>
-        <button onclick="jogarTurno('FUGIR')">Fugir</button>
-        <button onclick="jogarTurno('HABILIDADE_ESPECIAL')">Habilidade Supema</button>
-        
+    <footer>
+        <p>
+            <em>"E quando a última estrela cessar de brilhar, a música será ouvida outra vez."</em>
+        </p>
+        <p style="font-size: 0.7rem; opacity: 0.4;">
+            Sistema de RPG Backend - Desenvolvido por Rafael
+        </p>
+    </footer>
 
-        <h3>Histórico:</h3>
-        <div id="listaLogs"></div>
-    </div>
-
-    <script src="js/script.js"></script>
 </body>
 </html>
