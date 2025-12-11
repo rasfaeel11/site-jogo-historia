@@ -176,3 +176,117 @@ strong {
     margin: 3rem 0;
     text-shadow: 0 0 10px var(--gold-bright);
 }
+
+.timeline-section {
+    position: relative;
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem 0;
+}
+
+/* Linha vertical central */
+.timeline-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(to bottom, 
+        transparent, 
+        var(--gold-bright), 
+        var(--void-purple), 
+        transparent
+    );
+    transform: translateX(-50%);
+}
+
+.timeline-era {
+    margin-bottom: 5rem;
+    position: relative;
+    clear: both;
+}
+
+/* Bolinha central do marcador de Era */
+.era-marker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--bg-deep);
+    border: 2px solid var(--gold-bright);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 2;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Conteúdo da Era (Card) */
+.era-content {
+    width: 45%;
+    padding: 2rem;
+    background: rgba(10, 10, 15, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.era-content:hover {
+    border-color: var(--gold-bright);
+    transform: translateY(-5px);
+}
+
+/* Alternância Esquerda / Direita */
+.timeline-era:nth-child(odd) .era-content {
+    float: left;
+    text-align: right;
+    border-right: 3px solid var(--star-blue);
+}
+
+.timeline-era:nth-child(even) .era-content {
+    float: right;
+    text-align: left;
+    border-left: 3px solid var(--star-blue);
+}
+
+/* Títulos e Texto */
+.era-title {
+    font-family: var(--font-title);
+    color: var(--gold-bright);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.era-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.era-event {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.era-event strong {
+    color: var(--star-blue);
+    font-weight: normal;
+}
+
+/* Responsividade para celular */
+@media (max-width: 768px) {
+    .timeline-section::before { left: 20px; }
+    .era-marker { left: 20px; }
+    .era-content { width: 85%; float: right; text-align: left !important; }
+    .timeline-era:nth-child(odd) .era-content { border-right: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--star-blue); }
+}

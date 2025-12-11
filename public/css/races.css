@@ -1,0 +1,154 @@
+/* --- races.css: Estilos para o Livro dos Povos --- */
+
+/* Hero Específico */
+.races-hero {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 4rem;
+    background: radial-gradient(circle at bottom, rgba(79, 255, 255, 0.05), transparent 70%);
+}
+
+/* --- GRID DAS RAÇAS --- */
+.races-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    margin-bottom: 5rem;
+}
+
+.race-card {
+    background: rgba(10, 10, 15, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.race-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold-bright);
+    background: rgba(15, 15, 25, 0.8);
+}
+
+/* Cabeçalho do Card */
+.race-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+}
+
+.race-icon {
+    font-size: 2.5rem;
+    /* Cada raça terá uma cor de brilho diferente via inline style ou classes extras */
+}
+
+.race-title h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--text-primary);
+}
+.race-title span {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Detalhes Internos */
+.race-details {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-dim);
+}
+.race-details strong { color: var(--gold-bright); }
+
+.myth-box {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    border-left: 2px solid var(--text-dim);
+    font-style: italic;
+    font-size: 1rem;
+}
+
+/* --- SEÇÃO DE INTERPRETAÇÃO DO CÉU --- */
+.sky-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.sky-item {
+    border: 1px solid var(--gold-dim);
+    padding: 2rem;
+    background: rgba(212, 175, 55, 0.02);
+}
+
+.sky-item h3 { font-size: 1.2rem; margin-bottom: 1rem; color: var(--star-blue); }
+
+/* --- SEÇÃO DE PROFECIAS --- */
+.prophecy-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    border-top: 1px solid var(--gold-bright);
+    border-bottom: 1px solid var(--gold-bright);
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.prophecy-title {
+    font-family: var(--font-title);
+    color: var(--gold-bright);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.prophecy-list {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.prophecy-item {
+    padding-left: 2rem;
+    border-left: 3px solid var(--void-purple);
+}
+
+.prophecy-name {
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* A Grande Profecia Final */
+.grand-prophecy {
+    margin-top: 4rem;
+    background: radial-gradient(circle, rgba(50,10,10,0.4) 0%, transparent 70%);
+    padding: 3rem;
+    border: 1px solid rgba(255, 50, 50, 0.2);
+    text-align: center;
+}
+.grand-text {
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    color: var(--gold-bright);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .races-grid, .sky-grid { grid-template-columns: 1fr; }
+}
