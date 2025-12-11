@@ -1,9 +1,17 @@
 import { atacar, ataqueMagico, curar, rolarDadodd20 } from "../CombatService";
 // Ajuste os imports abaixo conforme o caminho das suas pastas
 import { Personagem } from "../../model/Personagem";
-import { Guerreiro } from "../../model/Guerreiro";
-import { Mago } from "../../model/Mago";
+import {  LUMINAR } from "../../model/LUMINAR";
+import { RACHADOR_HARMONIA } from "../../model/RACHADOR_HARMONIA";
 import { AcaoCombate, ClassesJogo } from "../../model/GameTypes";
+import { CANTOR_DE_EALEN } from "../../model/Cantor_de_Ealen";
+import { ENTROPISTA } from "../../model/Entropista";
+import { Forjardente } from "../../model/Forjardente";
+import { Guardiao_da_Singularidade } from "../../model/Guardiao_da_Singularidade";
+import { Sombrilico } from "../../model/Sombrilico";
+import { VIAJANTE_TALUEN } from "../../model/Viajante_Taluen";
+import { Lunath_Ancestral } from "../../model/Lunath_Ancestral";
+import { Mistico_da_Entalma } from "../../model/Mistico_da_Entalma";
 
 interface ResultadoTurno {
     jogoContinua: boolean;
@@ -22,16 +30,37 @@ export class GameLoop {
     // 1. INICIAR (Cria do zero)
     public iniciarJogo(nome: string, escolhaClasse: ClassesJogo): Personagem {
         switch (escolhaClasse) {
-            case "GUERREIRO":
-                this.principal = new Guerreiro(nome);
-                this.alvo = new Mago("Mago Maligno"); 
+            case "LUMINAR":
+                this.principal = new LUMINAR(nome); // Usando a classe genérica atualizada
                 break;
-
-            case "MAGO":
-                this.principal = new Mago(nome);
-                this.alvo = new Guerreiro("Cavaleiro Negro");
+            case "RACHADOR_HARMONIA":
+                this.principal = new RACHADOR_HARMONIA(nome);
                 break;
-
+            case "CANTOR_DE_EALEN":
+                this.principal = new CANTOR_DE_EALEN(nome);
+                break;
+            case "ENTROPISTA":
+                this.principal = new ENTROPISTA(nome);
+                break;
+            case "FORJARDENTE":
+                this.principal = new Forjardente(nome);
+                break;
+            case "GUARDIAO_SINGULARIDADE":
+                this.principal = new Guardiao_da_Singularidade(nome);
+                break;
+            case "SOMBRILICO":
+                this.principal = new Sombrilico(nome);
+                break;
+            case "VIAJANTE_TALUEN":
+                this.principal = new VIAJANTE_TALUEN(nome);
+                break;
+            case "LUNATH_ANCESTRAL":
+                this.principal = new Lunath_Ancestral(nome);
+                break;
+            case "MISTICO_ENTALMA":
+                this.principal = new Mistico_da_Entalma(nome);
+                break;
+            
             default:
                 throw new Error("Classe inválida.");
         }

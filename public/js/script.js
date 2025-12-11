@@ -137,7 +137,7 @@ function atualizarTela(heroi, inimigo) {
     if(heroi) {
 
         document.getElementById("displayHeroi").innerText = 
-            `${heroi.nome} (HP: ${heroi.hp}/${heroi.hpMax || heroi.hp})`;
+            `${heroi.nome} (HP: ${heroi.hp}/${heroi.hpMax || heroi.hp} MANA: ${heroi.mana}/${heroi.manaMax})`;
     }
     
     if(inimigo) {
