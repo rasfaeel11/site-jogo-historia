@@ -1,0 +1,108 @@
+/* --- hall.css: O Salão dos Heróis --- */
+
+.hall-hero {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 4rem;
+    background: radial-gradient(circle at top, rgba(79, 255, 255, 0.05), transparent 70%);
+}
+
+/* Tabela flutuante sagrada */
+.legends-container {
+    max-width: 1000px;
+    margin: -2rem auto 4rem auto;
+    background: rgba(10, 10, 15, 0.8);
+    border: 1px solid var(--gold-bright);
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    padding: 2rem;
+}
+
+/* Ornamentos nos cantos */
+.legends-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+}
+
+.legends-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1rem; /* Espaço entre linhas */
+}
+
+.legends-table th {
+    text-align: left;
+    color: var(--text-dim);
+    font-family: var(--font-title);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.legend-row {
+    background: rgba(255,255,255,0.02);
+    transition: all 0.3s ease;
+}
+
+.legend-row:hover {
+    background: rgba(212, 175, 55, 0.1);
+    transform: scale(1.01);
+}
+
+.legend-row td {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Coluna de Avatar */
+.avatar-cell { font-size: 1.5rem; }
+
+/* Nome e Classe */
+.name-text {
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    color: var(--gold-bright);
+    display: block;
+}
+.class-text {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+/* Status (Vivo/Morto) */
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.status-victory {
+    background: rgba(79, 255, 255, 0.1);
+    color: var(--star-blue);
+    border: 1px solid var(--star-blue);
+}
+
+.status-defeat {
+    background: rgba(255, 68, 68, 0.1);
+    color: #ff6b6b;
+    border: 1px solid #ff6b6b;
+}
+
+.status-ongoing {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid #777;
+}

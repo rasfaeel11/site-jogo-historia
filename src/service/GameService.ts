@@ -7,10 +7,10 @@ export class GameService {
     async iniciarNovoJogo(nome: string, classe: string) {
         const jogo = new GameLoop();
         
-        // Acessando direto a propriedade .principal (sem get)
+
         const personagemInicial = jogo.iniciarJogo(nome, classe as ClassesJogo);
         
-        // Acessando direto a propriedade .alvo (sem get)
+
         const inimigoInicial = jogo.alvo; 
 
         const { data, error } = await supabase
@@ -29,7 +29,7 @@ export class GameService {
         return { 
             id: data.id, 
             personagem: data.heroi_data,
-            inimigo: data.inimigo_data // <--- ADICIONE ESSA LINHA!
+            inimigo: data.inimigo_data 
         };
     }
 
@@ -52,7 +52,7 @@ export class GameService {
         const { error: erroUpdate } = await supabase
             .from('partidas')
             .update({
-                // Acessando direto as propriedades aqui também
+
                 heroi_data: jogo.principal,
                 inimigo_data: jogo.alvo,
                 logs: resultado.logs,
@@ -64,9 +64,21 @@ export class GameService {
 
         return {
             ...resultado, 
-            heroi: jogo.principal, // Direto na propriedade
-            inimigo: jogo.alvo     // Direto na propriedade
+            heroi: jogo.principal, 
+            inimigo: jogo.alvo     
         };
+    }
+
+    async listarLendas() {
+        const { data, error } = await supabase
+            .from('partidas')
+            .select('*')
+            .order('created_at', { ascending: false }) // Pega os mais recentes
+            .limit(10); // Top 10
+
+        if (error) throw new Error("Erro ao buscar o Hall das Lendas");
+
+        return data;
     }
 }
 
