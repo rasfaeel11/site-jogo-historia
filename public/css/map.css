@@ -1,0 +1,325 @@
+/* --- map.css: O Atlas de Narul --- */
+
+/* Hero Específico do Mapa */
+.map-hero {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 6rem;
+    background: radial-gradient(circle at bottom, rgba(212, 175, 55, 0.05), transparent 70%);
+}
+
+/* --- O MAPA PRINCIPAL --- */
+.map-frame-container {
+    max-width: 1200px;
+    margin: -3rem auto 4rem auto; /* Sobe um pouco sobre o Hero */
+    padding: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.map-frame {
+    border: 2px solid var(--gold-bright);
+    padding: 5px;
+    background: rgba(10, 10, 15, 0.8);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    position: relative;
+}
+
+/* Cantos ornamentais do mapa */
+.map-frame::before, .map-frame::after {
+    content: '✥';
+    position: absolute;
+    font-size: 2rem;
+    color: var(--gold-bright);
+    z-index: 3;
+}
+.map-frame::before { top: -15px; left: -15px; }
+.map-frame::after { bottom: -15px; right: -15px; }
+
+.main-map-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: sepia(20%) contrast(110%); /* Dá um tom mais antigo */
+    transition: all 0.5s ease;
+}
+
+.main-map-image:hover {
+    filter: sepia(0%) contrast(100%); /* Volta ao normal ao passar o mouse */
+    cursor: crosshair;
+}
+
+.map-caption {
+    text-align: center;
+    margin-top: 1rem;
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+/* --- SEÇÃO DE GEOGRAFIA (INTRO) --- */
+.geo-intro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.geo-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 2px solid var(--gold-dim);
+    padding: 1.5rem;
+}
+
+.geo-title {
+    font-family: var(--font-title);
+    color: var(--star-blue);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+/* --- SEÇÃO DE REGIÕES (GRID DETALHADO) --- */
+.region-section {
+    margin-bottom: 6rem;
+}
+
+.region-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.region-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    background: rgba(10, 10, 15, 0.6);
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.3s;
+}
+
+.region-row:hover {
+    border-color: var(--gold-dim);
+    background: rgba(20, 20, 30, 0.8);
+}
+
+.region-header {
+    background: rgba(255,255,255,0.03);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.region-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--gold-bright);
+}
+
+.region-name {
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.region-content {
+    padding: 2rem;
+}
+
+.region-details-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.detail-item {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.detail-item::before {
+    content: '•';
+    color: var(--star-blue);
+}
+
+/* --- LOCAIS ICÔNICOS (LISTA TÉCNICA) --- */
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.location-card {
+    border: 1px solid var(--text-dim);
+    padding: 1.5rem;
+    position: relative;
+    background: rgba(0,0,0,0.4);
+}
+
+.loc-type {
+    position: absolute;
+    top: -10px; right: 10px;
+    background: var(--bg-deep);
+    padding: 0 10px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    border: 1px solid var(--gold-dim);
+}
+
+.loc-name {
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.loc-desc {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
+
+/* --- LINHA DE SOMBRA --- */
+.shadow-warning {
+    background: linear-gradient(90deg, rgba(50,0,0,0.5), transparent);
+    border-left: 4px solid red;
+    padding: 2rem;
+    margin: 4rem 0;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.shadow-icon { font-size: 3rem; animation: pulse-glow 2s infinite; }
+
+@media (max-width: 768px) {
+    .region-row { grid-template-columns: 1fr; }
+    .region-header { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); flexDirection: row; gap: 1rem; justify-content: start; text-align: left; }
+    .region-icon { margin-bottom: 0; }
+}
+/* --- map.css - NOVOS ESTILOS (EXPANSÃO) --- */
+
+/* Estilo das "Gavetas" (Accordions) */
+.archive-drawer {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 10, 15, 0.5);
+    transition: all 0.3s ease;
+}
+
+.archive-drawer[open] {
+    background: rgba(20, 20, 30, 0.8);
+    border-color: var(--gold-dim);
+}
+
+.drawer-summary {
+    padding: 1.5rem;
+    cursor: pointer;
+    font-family: var(--font-title);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none; /* Remove a setinha padrão feia */
+}
+
+.drawer-summary::-webkit-details-marker { display: none; }
+
+.drawer-summary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--gold-bright);
+}
+
+.drawer-summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--gold-dim);
+}
+
+.archive-drawer[open] .drawer-summary::after {
+    content: '-';
+    color: var(--gold-bright);
+}
+
+.drawer-content {
+    padding: 0 2rem 2rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Tabelas de Dados Técnicos */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.data-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-left: 2px solid var(--star-blue);
+}
+
+.data-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.data-value {
+    font-family: 'Courier Prime', monospace;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+/* Seção do Vilão / Corrupção */
+.corruption-zone {
+    border-left: 3px solid #ff4444;
+    background: linear-gradient(90deg, rgba(50, 0, 0, 0.2), transparent);
+}
+
+.corruption-text {
+    color: #ffaaaa;
+    font-style: italic;
+}
+
+/* Lista de Fauna/Flora */
+.bio-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.bio-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.bio-icon { font-size: 1.5rem; }
+
+@media (max-width: 768px) {
+    .bio-list { grid-template-columns: 1fr; }
+}
