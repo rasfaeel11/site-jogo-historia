@@ -1,0 +1,173 @@
+/* --- jogo.css: Interface de Combate --- */
+
+/* Ajuste do container para centralizar o jogo */
+.game-container {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2rem;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* --- TELA 1: MENU DE CRIAÇÃO --- */
+.creation-panel {
+    background: rgba(10, 10, 15, 0.7);
+    border: 1px solid var(--gold-bright);
+    padding: 4rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    max-width: 600px;
+    margin: 0 auto;
+    animation: float 6s infinite ease-in-out;
+}
+
+.input-group {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.input-label {
+    display: block;
+    font-family: var(--font-title);
+    color: var(--gold-bright);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+/* Estilo dos Inputs e Selects */
+.mystic-input {
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--text-dim);
+    border-radius: 0;
+    padding: 1rem;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    transition: all 0.3s;
+}
+
+.mystic-input:focus {
+    border-color: var(--star-blue);
+    outline: none;
+    box-shadow: 0 0 15px rgba(79, 255, 255, 0.2);
+}
+
+/* --- TELA 2: ARENA DE COMBATE --- */
+.hidden { display: none; }
+
+.arena-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Herói vs Inimigo */
+    gap: 4rem;
+    margin-bottom: 3rem;
+    align-items: stretch;
+}
+
+/* Cards de Personagem (HUD) */
+.char-card {
+    background: linear-gradient(180deg, rgba(20,20,30,0.9) 0%, rgba(5,5,5,0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    position: relative;
+    border-top: 3px solid var(--text-dim);
+    transition: all 0.3s;
+}
+
+.char-card.hero { border-top-color: var(--star-blue); }
+.char-card.enemy { border-top-color: #ff4444; }
+
+.char-name {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--gold-bright);
+    margin-bottom: 1rem;
+    display: block;
+    text-transform: uppercase;
+}
+
+.stat-row {
+    font-family: 'Courier New', monospace; /* Fonte técnica */
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 0.2rem;
+}
+
+.hp-text { color: #ff6b6b; font-weight: bold; }
+.mana-text { color: #4fffff; font-weight: bold; }
+
+/* Grid de Ações (Botões) */
+.actions-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid var(--gold-dim);
+    border-bottom: 1px solid var(--gold-dim);
+}
+
+.btn-action {
+    padding: 1rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: var(--text-primary);
+    font-family: var(--font-title);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.btn-action:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--gold-bright);
+    transform: translateY(-2px);
+}
+
+.btn-attack:hover { border-color: #ff4444; color: #ff4444; box-shadow: 0 0 10px rgba(255, 68, 68, 0.2); }
+.btn-magic:hover { border-color: #4fffff; color: #4fffff; box-shadow: 0 0 10px rgba(79, 255, 255, 0.2); }
+.btn-heal:hover { border-color: #55ff55; color: #55ff55; box-shadow: 0 0 10px rgba(85, 255, 85, 0.2); }
+.btn-special { 
+    border-color: var(--gold-bright); 
+    color: var(--gold-bright); 
+    font-weight: bold;
+}
+.btn-special:hover { background: var(--gold-bright); color: #000; box-shadow: 0 0 20px var(--gold-dim); }
+
+/* Console de Logs */
+.log-console {
+    background: #000;
+    border: 1px solid var(--text-dim);
+    height: 200px;
+    overflow-y: auto;
+    padding: 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #bbb;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* Custom Scrollbar para o Log */
+.log-console::-webkit-scrollbar { width: 8px; }
+.log-console::-webkit-scrollbar-track { background: #111; }
+.log-console::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+
+.log-entry {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #222;
+}
+.log-entry:first-child { color: var(--gold-bright); font-weight: bold; } /* Última mensagem destaca */
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .arena-grid { grid-template-columns: 1fr; }
+}

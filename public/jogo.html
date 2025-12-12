@@ -2,53 +2,114 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>RPG Backend Teste</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação de Combate - O Canto</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/jogo.css">
 </head>
 <body>
 
-    <div id="tela-menu">
-        <h1>Criar Novo Jogo</h1>
-        
-        <label>Nome do Herói:</label>
-        <input type="text" id="inputNome" placeholder="Ex: Aragorn">
-        <br><br>
+    <nav class="nav-bar" style="position: relative; background: transparent;">
+        <a href="index.html" class="nav-link">← VOLTAR AO HUB</a>
+        <div style="font-family: var(--font-title); color: var(--gold-bright);">SISTEMA DE BATALHA</div>
+    </nav>
 
-        <label>Classe:</label>
-        <select id="selectClasse">
-            <option value="LUMINAR">Luminar</option>
-            <option value="RACHADOR_HARMONIA">Rachador da Harmonia</option>
-            <option value="CANTOR_DE_EALEN">Cantor de Ealen</option>
-            <option value="ENTROPISTA">Entropista</option>
-            <option value="FORJARDENTE">Forjardente</option>
-            <option value="GUARDIAO_SINGULARIDADE">Guardião da Singularidade</option>
-            <option value="SOMBRILICO">Sombrílico</option>
-            <option value="VIAJANTE_TALUEN">Viajante Taluen</option>
-            <option value="LUNATH_ANCESTRAL">Lunath Ancestral</option>
-            <option value="MISTICO_ENTALMA">Místico da Entalma</option>
-</select>
-        <br><br>
+    <div class="game-container">
 
-        <button onclick="comecarJogo()">INICIAR AVENTURA</button>
-    </div>
+        <div id="tela-menu" class="creation-panel">
+            <h1 style="font-size: 2.5rem; margin-bottom: 2rem;">Nova Encarnação</h1>
+            
+            <div class="input-group">
+                <label class="input-label">Nome do Avatar</label>
+                <input type="text" id="inputNome" class="mystic-input" placeholder="Ex: Elareth">
+            </div>
 
-    <div id="tela-jogo" style="display: none;">
-        <h1>Combate</h1>
-        
-        <h3>Você: <span id="displayHeroi">...</span></h3>
-        <h3>Inimigo: <span id="displayInimigo">...</span></h3>
-        <hr>
-        
-        <button onclick="jogarTurno('ATACAR')">Atacar</button>
-        <button onclick="jogarTurno('CURAR')">Curar</button>
-        <button onclick="jogarTurno('MAGIA')">Magia</button>
-        <button onclick="jogarTurno('FUGIR')">Fugir</button>
-        <button onclick="jogarTurno('HABILIDADE_ESPECIAL')">Habilidade Supema</button>
-        
+            <div class="input-group">
+                <label class="input-label">Ordem Sagrada</label>
+                <select id="selectClasse" class="mystic-input">
+                    <option value="LUMINAR">🛡️ Luminar (Tank)</option>
+                    <option value="ENTROPISTA">🌀 Entropista (Debuff)</option>
+                    <option value="CANTOR_DE_EALEN">🎵 Cantor de Eälen (Control)</option>
+                    <option value="GUARDIAO_SINGULARIDADE">🌌 Guardião (Bruiser)</option>
+                    <option value="SOMBRILICO">🌑 Sombrílico (Anti-Mago)</option>
+                    <option value="VIAJANTE_TALUEN">⏳ Viajante (Speed)</option>
+                    <option value="FORJARDENTE">🔥 Forjardente (Híbrido)</option>
+                    <option value="LUNATH_ANCESTRAL">🌿 Lunath (Healer)</option>
+                    <option value="RACHADOR_HARMONIA">🎯 Rachador (Sniper)</option>
+                    <option value="MISTICO_ENTALMA">⚛️ Místico (Utility)</option>
+                </select>
+            </div>
 
-        <h3>Histórico:</h3>
-        <div id="listaLogs"></div>
+            <button onclick="comecarJogo()" class="btn-primary" style="width: 100%;">MATERIALIZAR</button>
+        </div>
+
+
+        <div id="tela-jogo" class="hidden">
+            
+            <div class="arena-grid">
+                
+                <div class="char-card hero">
+                    <span class="char-name" id="displayHeroiNome">Heroi</span>
+                    <div class="stat-row">
+                        <span>Estado:</span>
+                        <span id="displayHeroi" class="hp-text">...</span>
+                    </div>
+                </div>
+
+                <div class="char-card enemy">
+                    <span class="char-name" id="displayInimigoNome">Inimigo</span>
+                    <div class="stat-row">
+                        <span>Estado:</span>
+                        <span id="displayInimigo" class="hp-text">...</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="actions-panel">
+                <button onclick="jogarTurno('ATACAR')" class="btn-action btn-attack">⚔️ Físico</button>
+                <button onclick="jogarTurno('MAGIA')" class="btn-action btn-magic">✨ Magia</button>
+                <button onclick="jogarTurno('CURAR')" class="btn-action btn-heal">🧪 Curar</button>
+                <button onclick="jogarTurno('HABILIDADE_ESPECIAL')" class="btn-action btn-special">🌟 SUPREMA</button>
+                <button onclick="tentarFugir()" class="btn-action">🏃 Fugir</button>
+                <button onclick="ativarModoBerserker()" class="btn-action" style="border-color: #ffaa00;">🤖 Auto</button>
+            </div>
+
+            <div class="log-console" id="listaLogs">
+                <div class="log-entry">Aguardando início do combate...</div>
+            </div>
+
+        </div>
+
     </div>
 
     <script src="js/script.js"></script>
+
+    <script>
+        // Sobrescrevendo a função atualizarTela do app.js para separar Nome e HP visualmente
+        // Isso é um "Monkey Patch" para funcionar com o novo HTML sem mudar seu app.js original demais
+        
+        const originalAtualizarTela = atualizarTela; // Guarda a velha
+
+        atualizarTela = function(heroi, inimigo) {
+            if(heroi) {
+                // Atualiza o Nome separado
+                document.getElementById("displayHeroiNome").innerText = heroi.nome;
+                // Atualiza o HP/Mana no lugar certo
+                const stats = `HP: ${heroi.hp}/${heroi.hpMax} | MP: ${heroi.mana}`;
+                document.getElementById("displayHeroi").innerText = stats;
+            }
+            
+            if(inimigo) {
+                document.getElementById("displayInimigoNome").innerText = inimigo.nome;
+                const stats = `HP: ${inimigo.hp}/${inimigo.hpMax || '?'}`;
+                document.getElementById("displayInimigo").innerText = stats;
+            }
+        }
+    </script>
+
 </body>
 </html>
